@@ -1,81 +1,44 @@
 #include "main.h"
-#include <stdio.h>
-#include <stdlib.h>
 /**
-*
-*
-*
-*/
-
-int _intlen(unsigned long int num)
-{ int length = 0;
-while (num)
-{
-length++;
-num /= 10; }
-return (length); }
-
-/**
-*
-*
-*
-*/
-
-int _strlen(char *string)
-{ int length = 0;
-while (*string)
-{ length++;
-string++; }
-return (length); }
-
-/**
-*
-*
-*
-*
-*/
-
-unsigned long int map2int(char *n)
-{ unsigned long int num = 0;
-while (*n)
-{
-num = num * 10 + (*n - 48);
-n++; }
-return (num); }
-
-/**
-*
-*
-*
-*/
-
-char *map2char(unsigned long int num)
-{
-char *a = malloc(_intlen(num) * sizeof(char));
-char *b = a;
-while (num)
-{
-*a = num % 10;
-num /= 10;
-a++; }
-*a = '\0';
-return (b); }
-
-
-
-/**
-*
-*
-*
-*/
-
+ * infinite_add -  adds two numbers
+ * @n1: first number
+ * @n2: second number
+ * @r: result
+ * @size_r: result lenght
+ * Return: sum
+ *
+ */
 char *infinite_add(char *n1, char *n2, char *r, int size_r)
-{
-unsigned long int sum = map2int(n1) + map2int(n2);
-if (_intlen(sum) <= size_r)
-{
-*r = sum;
-return (map2char(sum)); }
+{ int i = 0, j = 0, k, l = 0, f, s, d = 0;
+while (n1[i] != '\0')
+i++;
+while (n2[j] != '\0')
+j++;
+if (i > j)
+l = i;
 else
-{
-return (0); }}
+l = j;
+if (l + 1 > size_r)
+return (0);
+r[l] = '\0';
+for (k = l - 1 ; k >= 0 ; k--)
+{i--;
+j--;
+if (i >= 0)
+f = n1[i] - '0';
+else
+f = 0;
+if (j >= 0)
+s = n2[j] - '0';
+else
+s = 0;
+r[k] = (f + s + d) % 10 + '0';
+d = (f + s + d) / 10; }
+if (d == 1)
+{ r[l + 1] = '\0';
+if (l + 2 > size_r)
+return (0);
+while (l-- >= 0)
+r[l + 1] = r[l];
+r[0] = d + '0'; }
+return (r); }
