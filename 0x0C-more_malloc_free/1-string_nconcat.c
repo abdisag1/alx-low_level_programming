@@ -1,36 +1,31 @@
 #include "main.h"
 #include <stdlib.h>
 /**
- * string_nconcat - concatenates two strings.
- * @s1: first string to copy
- * @s2: second string to copy
- * @n: number of bytes of s2 to copy
- *
- * Return: char pointer to newly allocated place in memory
+ * string_nconcat - concatenates 2 string
+ * @s1: first string
+ * @s2: second string
+ * @n: number of byes to copy from second string
+ * Return: pointer to new string
  */
 char *string_nconcat(char *s1, char *s2, unsigned int n)
-{ unsigned int i, j, k;
-char *s;
+{ unsigned int i, j, len1 = 0, len2 = 0;
+char *new_str;
 if (s1 == NULL)
-i = 0;
-else
-{
-for (i = 0; s1[i]; i++)
-; }
+s1 = "";
 if (s2 == NULL)
-j = 0;
-else
-{
-for (j = 0; s2[j]; j++)
-; }
-if (j > n)
-j = n;
-s = malloc(sizeof(char) * (i + j + 1));
-if (s == NULL)
+s2 = "";
+while (*(s1 + len1) != '\0')
+len1++;
+while (*(s2 + len2) != '\0')
+len2++;
+if (n >= len2)
+n = len2;
+new_str = malloc(sizeof(char) * (len1 + n + 1));
+if (new_str == NULL)
 return (NULL);
-for (k = 0; k < i; k++)
-s[k] = s1[k];
-for (k = 0; k < j; k++)
-s[k + i] = s2[k];
-s[i + j] = '\0';
-return (s); }
+for (i = 0; i < len1; i++)
+new_str[i] = s1[i];
+for (j = 0; j < n; i++, j++)
+new_str[i] = s2[j];
+new_str[i] = '\0';
+return (new_str);  }
