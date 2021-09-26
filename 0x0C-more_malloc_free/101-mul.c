@@ -1,54 +1,40 @@
 #include "main.h"
 #include <stdlib.h>
-#include <stdio.h>
 /**
- * _isdigit - tells if the string consists of digits
- * @argv: pointer to current item in argument
- * Return: return 0 if all digits, 1 if not all digits.
+ * string_nconcat - ...
+ * @s1: ...
+ * @s2: ...
+ * @n: ...
+ *
+ * Return: ...
  */
-int _isdigit(char *argv)
-{ int i;
-i = 0;
-while (argv[i])
-{
-if (argv[i] >= '0' && argv[i] <= '9')
+char *string_nconcat(char *s1, char *s2, unsigned int n)
+{ unsigned int i = 0, j = 0, k = 0, l = 0;
+char *str;
+if (s1 == NULL)
+s1 = "";
+if (s2 == NULL)
+s2 = "";
+while (s1[i])
 i++;
+while (s2[k])
+k++;
+if (n >= k)
+l = i + k;
 else
-return (1); }
-return (0); }
-/**
- * _atoi - converts a string of ascii digits to the values they represent
- * @s: pointer to the source string
- * Return: value of digits
- */
-int _atoi(char *s)
-{ int i, result;
-i = result = 0;
-while (s[i])
+l = i + n;
+str = malloc(sizeof(char) * l + 1);
+if (str == NULL)
+return (NULL);
+k = 0;
+while (j < l)
 {
-if (s[i] >= '0' && s[i] <= '9')
+if (j <= i)
+str[j] = s1[j];
+if (j >= i)
 {
-result *= 10;
-result += (s[i] - '0'); }
-i++; }
-return (result); }
-/**
- * main - main function call
- * @argc: argument count
- * @argv: 2D array of arguments
- * Return: return 0 on success, 98 on failure
- */
-int main(int argc, char *argv[])
-{ int i;
-malloc();
-if (argc != 3)
-{
-printf("Error\n");
-exit(98); }
-for (i = 1; i < argc; i++)
-{
-if (_isdigit(argv[i]))
-{
-printf("Error\n");
-exit(98); }}
-return (0); }
+str[j] = s2[k];
+k++; }
+j++; }
+str[j] = '\0';
+return (str); }
