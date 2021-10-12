@@ -6,12 +6,12 @@
  *
  * Return: The number of nodes of the linked list
  */
-size_t print_listint(const listint_t *h) 
+size_t print_listint(const listint_t *h)
 { int count = 0;
 if (h != NULL)
-{ while (h)
 {
-printf("%d\n", h->n);
+while (h)
+{ printf("%d\n", h->n);
 h = h->next;
 count++; }}
 return (count); }
